@@ -11,7 +11,18 @@ import PROPERTIES
 
 def main():
     """Central process"""
-    workingwithalbumimages(PROPERTIES.DOWNLOAD_URL)
+    #Get the name of the album
+    albumName=workingwithtitle(PROPERTIES.DOWNLOAD_URL)
+    print("The name of the album is: "+albumName)
+    #Get the list of images by album
+    listImagesFiltered=workingwithalbumimages(PROPERTIES.DOWNLOAD_URL)
+    print("List of images by album: "+listImagesFiltered)
+
+def workingwithtitle(parsingUrl):
+    nameOfAlbum="tristania"
+    datos2 = urllib.request.urlopen(parsingUrl).read().decode()
+    soup = BeautifulSoup(datos2)
+    return soup.findAll("span",{"class":"showalbumheader__gallerytitle"})[0].get_text()
 
 
 def workingwithalbumimages(parsingUrl):
@@ -23,10 +34,10 @@ def workingwithalbumimages(parsingUrl):
     for tag in tags:
         srcToCheck = tag.get('src')
         if not (srcToCheck == None) and ("small" in srcToCheck):
-            print(srcToCheck)
+            #print(srcToCheck)
             listOfImages.append(PROPERTIES.HTTPS_CONSTANT+srcToCheck)
     str1 = ", "    
-    print("final: "+str1.join(listOfImages))
+    #print("final: "+str1.join(listOfImages))
     return str1.join(listOfImages)
 
 
@@ -39,10 +50,6 @@ def writefilefromscratch(pathFile):
             exitFile, delimiter=',', quoting=csv.QUOTE_ALL)
         # Write header
         resultWriter.writerow(['Name', 'Price', 'Description', 'Images'])
-
-
-def addrowfofile(pathFile, rowToAdd):
-    pass
 
 
 if __name__ == "__main__":
