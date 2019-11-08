@@ -5,6 +5,7 @@ import urllib.request
 
 import requests
 from bs4 import BeautifulSoup
+from selenium import webdriver
 
 import PROPERTIES
 
@@ -12,13 +13,12 @@ import PROPERTIES
 def obtainparsefromhtml(parsingUrl):
     """Return the information of html parsed"""
     datos = urllib.request.urlopen(parsingUrl).read().decode()
-    return BeautifulSoup(datos)
+    return BeautifulSoup(datos, "lxml")
 
 
-def main():
-    """Central process"""
+def getdictionarybyalbum(urlOfAlbum):
     # Get common object to parse the html
-    soup = obtainparsefromhtml(PROPERTIES.DOWNLOAD_URL)
+    soup = obtainparsefromhtml(urlOfAlbum)
     # Get the name of the album
     albumName = soup.findAll("span", {"class": "showalbumheader__gallerytitle"})[
         0].get_text()
@@ -30,6 +30,43 @@ def main():
     # Get the list of images by album
     listImagesFiltered = workingwithalbumimages(soup)
     print("List of images by album: "+listImagesFiltered)
+    # Construct the row for album
+    dictForFile = {
+        "name": albumName,
+        "price": 0,
+        "description": albumDescription,
+        "images": listImagesFiltered,
+        "referenceAlbum": urlOfAlbum
+    }
+    return dictForFile
+
+
+def main():
+    """Central process"""
+    if PROPERTIES.CHECK_ONLY_ALBUM:
+        # Scrap only one album
+        dictForFile = getdictionarybyalbum(PROPERTIES.DOWNLOAD_ALBUM_URL)
+        dictFinal = []
+        dictFinal.append(dictForFile)
+        writefilefromscratch(PROPERTIES.CSV_PATH_FILE, dictFinal)
+    else:
+        # Get common object to parse the html
+        driver = webdriver.Firefox(executable_path=PROPERTIES.PATH_SELENIUM)
+        driver.get(PROPERTIES.DOWNLOAD_COMPLETE_ALBUMS)
+        htmlObtenido = driver.page_source
+        soup1 = BeautifulSoup(htmlObtenido)
+        albumsClasses = soup1.find_all("a", class_="album__main album4__main")
+        # Result of final dictionary
+        dictFinal = []
+        for tag1 in albumsClasses:
+            referenceAlbum = tag1.get('href')
+            if 'album' in referenceAlbum:
+                print(referenceAlbum)
+                # Get the info of the album
+                dictForFile = getdictionarybyalbum(referenceAlbum)
+                dictFinal.append(dictForFile)
+        writefilefromscratch(PROPERTIES.CSV_PATH_FILE, dictFinal)
+        driver.close()
 
 
 def workingwithalbumimages(soupObtained):
@@ -46,15 +83,20 @@ def workingwithalbumimages(soupObtained):
     return str1.join(listOfImages)
 
 
-def writefilefromscratch(pathFile):
+def writefilefromscratch(pathFile, dictionaryOfAlbums):
     """
     Process to store the information in a csv file
     """
-    with open(pathFile, mode='w') as exitFile:
-        resultWriter = csv.writer(
-            exitFile, delimiter=',', quoting=csv.QUOTE_ALL)
+    with open(pathFile, mode='w', newline='') as exitFile:
+        fieldnames = ['name', 'price', 'description',
+                      'images', 'referenceAlbum']
+        writer = csv.DictWriter(exitFile, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(dictionaryOfAlbums)
+        # resultWriter = csv.writer(
+        #    exitFile, delimiter=',', quoting=csv.QUOTE_NONE)
         # Write header
-        resultWriter.writerow(['Name', 'Price', 'Description', 'Images'])
+        #resultWriter.writerow(['Name', 'Price', 'Description', 'Images'])
 
 
 if __name__ == "__main__":
