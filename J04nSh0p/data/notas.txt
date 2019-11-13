@@ -1,0 +1,66 @@
+discord
+
+españa, francia, alemania, 400 miembros
+
+lanzamiento de zapatillas, marca, claboracion conc antante, que valen 130 euros, el precio asciende bastante
+
+tiene un grupo enfocado a dar consejos, guias, gente dialogue, etc.
+
+En esos grupos es importante el tema de scripts
+
+script que monitoree 5 o 6 productos en páginas específicas, cuyas tallas están limitadas
+
+si la página añade un nuevo talla y envia una notificación a los usuarios
+
+en cuanto registra la nueva talla, manda alerta
+
+-Diferentes scripts para dif páginas
+
+añadir 5 o 6 productos, zapatillas, etc, star monitoreando cada 50 seg, detecta alertas y le pega con la api de discord, con el fin de que la gente entre y las compre
+
+carpeta
+
+archivo python
+crome driver
+tallas en gral, la memoria almacene si hay cambios o no
+si añadimos una zapatilla, talla 39 y 40disponible, envia alerta solo si hay una nueva
+
+3 productos por minuto y no banearlo, planea 6 productos por página
+
+solebox
+
+lo mas importante son las tallas, mandan titulo, imagen ,precio
+
+
+shopify
+como añadir el coso al carrito
+shopify individual, hacerlo, el pack es 1 script que monitorea 100 o 120 páginas
+
+añadir dif productos, cuando aparezca la talla, mandarlo por discord
+
+proximos lanzamientos, manda a discord la alerta, que dia y que hora va a lanzar, precio, tallas, imagen
+añadir nuevos productos y monitorear
+
+ATC-->Add to cart
+
+se tiene un plus que al dar click lo añades al carro
+cochipe.com-->llamada para que se agregue al carro
+
+70 y 110 por página, el precio influye en si la página lleva más tiempo
+
+-descargar discord, probamos
+- me pasa 1 página, hago el script
+-testeamos en el servidor que tendriamos
+-se realiza el pago
+-testea 1o 2 dias
+
+tallas:
+producto.txt (tallas, 23, 12, 24.8)
+
+https://kith.com/
+Kith
+Kith
+Sneakers, apparel, shoes, boots, Ronnie Fieg, ASICS, Nike, Mercer Pant, Bleecker, Gel Lyte, adidas, Just Us, Filling Pieces, New Balance, Jordan, Kithstrike
+https://kith.com/cart/19435689771136:1
+https://kith.com/cart/19435701174400:1
+https://kith.com/cart/19436177948800:1

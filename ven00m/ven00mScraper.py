@@ -32,8 +32,7 @@ def getdictionarybyalbum(urlOfAlbum):
     print("List of images by album: "+listImagesFiltered)
     # Construct the row for album
     dictForFile = {
-        "name": albumName,
-        "price": 0,
+        "name": albumName,        
         "description": albumDescription,
         "images": listImagesFiltered,
         "referenceAlbum": urlOfAlbum
@@ -88,7 +87,7 @@ def writefilefromscratch(pathFile, dictionaryOfAlbums):
     Process to store the information in a csv file
     """
     with open(pathFile, mode='w', newline='') as exitFile:
-        fieldnames = ['name', 'price', 'description',
+        fieldnames = ['name', 'description',
                       'images', 'referenceAlbum']
         writer = csv.DictWriter(exitFile, fieldnames=fieldnames)
         writer.writeheader()
