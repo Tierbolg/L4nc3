@@ -123,18 +123,20 @@ def generatecommonfile():
         size = ""
         dictsizeCheck = {}
         for product in extract_products_collection(PROPERTIES.url, collection):
-            # Ver si esta en stock
-            if product['stock'] == "Yes" and product['title'] == 'Kith Williams III Contrast Hoodie - Scarab':
-                title = product['title']
-                price = product['price']
-                checkout_id = product['checkout_id']
-                size = product['option_value']
-                urlImage = product['image_src']
-                product_url = product['product_url']
-                checkout_url = PROPERTIES.checkout_url+checkout_id+PROPERTIES.checkout_quantity
-                dictsizeCheck[size] = checkout_url
-                print("Title: {} Price: {} checkout: {} size: {} ".format(
-                    title, price, checkout_url, size))
+            # Ver si esta en stock y en el excel de configuracion
+            for productExcel in getproductoslist(collection):
+                #if product['stock'] == "Yes" and product['title'] == 'Kith Williams III Contrast Hoodie - Scarab':
+                if product['stock'] == "Yes" and product['title'] == productExcel:
+                    title = product['title']
+                    price = product['price']
+                    checkout_id = product['checkout_id']
+                    size = product['option_value']
+                    urlImage = product['image_src']
+                    product_url = product['product_url']
+                    checkout_url = PROPERTIES.checkout_url+checkout_id+PROPERTIES.checkout_quantity
+                    dictsizeCheck[size] = checkout_url
+                    print("Title: {} Price: {} checkout: {} size: {} ".format(
+                        title, price, checkout_url, size))
 
     discordsend(title, checkout_url, urlImage,
                 checkout_url, price, size, dictsizeCheck)
@@ -161,3 +163,15 @@ def discordsend(title, product_url, urlImage, checkout_url, price, size, dictsiz
     embed.add_embed_field(name='Size', value=valueImage, inline=False)
     webhook.add_embed(embed)
     webhook.execute()
+
+
+def getproductoslist(coleccionRevisar):
+    productosdeexcel = []
+    with open(PROPERTIES.csv_configuration, newline='') as f:
+        reader = csv.DictReader(f, delimiter=',', quoting=csv.QUOTE_NONE)
+        line_count = 0
+        for row in reader:
+            if row["Collection"] in coleccionRevisar:
+                productosdeexcel.append(row["Name"])
+            line_count += 1
+    return productosdeexcel
