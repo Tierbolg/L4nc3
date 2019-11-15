@@ -64,3 +64,66 @@ Sneakers, apparel, shoes, boots, Ronnie Fieg, ASICS, Nike, Mercer Pant, Bleecker
 https://kith.com/cart/19435689771136:1
 https://kith.com/cart/19435701174400:1
 https://kith.com/cart/19436177948800:1
+
+Asi se parsea una pagina de shopify, navegando por categorias
+https://github.com/lagenar/shopify-scraper
+
+
+https://kith.com/products/cc-kith-2016dmw-01
+
+1017-alyx-9sm-visual-tee-white19435656282240
+
+para comprar usar el variant_id
+https://kith.com/cart/yeezy-t-shirt-camo7780646593
+
+debe quedar asi:
+https://kith.com/cart/7780646593:1
+
+product['sku']
+'889132831696'
+product['variant_id']
+'yeezy-t-shirt-camo7780646593'
+product['title']
+'Yeezy T-Shirt - Camo'
+
+
+
+parser = OptionParser()
+    parser.add_option("--list-collections", dest="list_collections",
+                      action="store_true",
+                      help="List collections in the site")
+    parser.add_option("--collections", "-c", dest="collections",
+                      default="",
+                      help="Download products only from the given collections (comma separated)")
+    (options, args) = parser.parse_args()
+
+
+
+    product
+    {'body': '<p>The KITH Reverse...Terry</p>', 'image_src': 'https://cdn.shopify...571438585', 'option_value': 'XL', 'price': '130.00', 'product_type': 'Hoodies', 'product_url': 'https://kith.com/pr...lina-blue', 'sku': '52118852', 'stock': 'No', 'title': 'KITH Reverse Frayed...lina Blue', 'variant_id': 'kith-reverse-frayed...096476065'}
+
+    Code,Collection,Category,Name,Variant Name,Price,In Stock,URL,Image URL
+98232363,Mens Footwear - Sneakers,Sneakers,adidas Consortium x NiceKicks Ultraboost - White / Multi,3,180.00,No,https://kith.com/products/aaef7775,https://cdn.shopify.com/s/files/1/0094/2252/products/AdidasNiceKicksUltraboostTieDye-EF7775.jpg?v=1572615411
+
+
+esto es lo que requiero:
+products = get_page(url, page, col)
+    while products:
+        for product in products:
+            title = product['title']
+            product_type = product['product_type']
+            product_url = url + '/products/' + product['handle']
+            product_handle = product['handle']
+Aqui vienen todos los productos, internamente hay que iterar 
+        for i, variant in enumerate(product['variants']):
+                price = variant['price']
+
+
+
+                collection-->hoodies
+                product_url-->'https://kith.com/products/kith-x-be-rbrick-pattern-hoodie-multi'
+
+
+                esto si se debe de instalar:
+                pip install DiscordHooks
+                pip install discord-webhook--este si

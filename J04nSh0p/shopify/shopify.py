@@ -134,7 +134,7 @@ def extract_products(url, path, collections=None):
         writer = csv.writer(f)
         writer.writerow(['Code', 'Collection', 'Category',
                          'Name', 'Variant Name',
-                         'Price', 'In Stock', 'URL', 'Image URL', 'Body'])
+                         'Price', 'In Stock', 'URL', 'Image URL'])
         seen_variants = set()
         for col in get_page_collections(url):
             if collections and col['handle'] not in collections:
@@ -152,7 +152,7 @@ def extract_products(url, path, collections=None):
                                  product['title'], product['option_value'],
                                  product['price'],
                                  product['stock'], product['product_url'],
-                                 product['image_src'], product['body']])
+                                 product['image_src']])
 
 
 if __name__ == '__main__':
