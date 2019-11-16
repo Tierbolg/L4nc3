@@ -56,7 +56,7 @@ def filtercollection():
                 print(f'Column names are {", ".join(row)}')
                 line_count += 1
             print(
-                f'\t{row["Collection"]} with product:  {row["Name"]} with size: {row["Size"]}.')
+                f'\t{row["Collection"]} with product:  {row["Url"]} ')
             if row["Collection"] not in Collection:
                 Collection.append(row["Collection"])
             line_count += 1
@@ -125,8 +125,8 @@ def generatecommonfile():
         for product in extract_products_collection(PROPERTIES.url, collection):
             # Ver si esta en stock y en el excel de configuracion
             for productExcel in getproductoslist(collection):
-                #if product['stock'] == "Yes" and product['title'] == 'Kith Williams III Contrast Hoodie - Scarab':
-                if product['stock'] == "Yes" and product['title'] == productExcel:
+                # if product['stock'] == "Yes" and product['title'] == 'Kith Williams III Contrast Hoodie - Scarab':
+                if product['stock'] == "Yes" and productExcel in product['product_url']:
                     title = product['title']
                     price = product['price']
                     checkout_id = product['checkout_id']
@@ -172,6 +172,67 @@ def getproductoslist(coleccionRevisar):
         line_count = 0
         for row in reader:
             if row["Collection"] in coleccionRevisar:
-                productosdeexcel.append(row["Name"])
+                productosdeexcel.append(row["Url"])
             line_count += 1
     return productosdeexcel
+
+
+def llenadictproductos():
+    dictCache = {}
+    # Lista de colecciones diferentes
+    listacolleccionesfiltradas = filtercollection()
+    for collection1 in filtercollection():
+        dictCache[collection1] = extract_products_collection(
+            PROPERTIES.url, collection1)
+    return dictCache
+
+
+def buscarproductos():
+    with open(PROPERTIES.csv_configuration, newline='') as f:
+        reader = csv.DictReader(f, delimiter=',', quoting=csv.QUOTE_NONE)        
+        for row in reader:
+            title = ""
+            price = ""
+            urlImage = ""
+            product_url = ""
+            checkout_url = ""
+            size = ""
+            dictsizeCheck = {}
+            #Cada renglon es un producto, muchas tallas        
+            claseGenerada=comparador(row['Url'],row['Collection'])    
+            print(claseGenerada.title)
+            discordsend(claseGenerada.title,claseGenerada.product_url,claseGenerada.urlImage,claseGenerada.checkout_url,claseGenerada.price,claseGenerada.size,claseGenerada.dictsizeCheck)
+            print(row)
+
+
+class Envios:
+    title=''
+    price=''
+    product_url=''
+    checkout=''
+    size=''
+    urlImage=''
+    checkout_url=''
+    dictsizeCheck={}
+    pass
+
+def comparador(urlCompare,coleccioncheck):
+    envio=Envios()
+    dictsizeCheck = {}
+    for product in extract_products_collection(PROPERTIES.url,coleccioncheck):
+        #print(product['product_url'])        
+        if product['stock'] == "Yes" and urlCompare == product['product_url']:
+            envio.title = product['title']
+            envio.price = product['price']
+            envio.checkout = product['checkout_id']
+            size = product['option_value']
+            envio.urlImage= product['image_src']
+            checkout_id = product['checkout_id']
+            envio.product_url = product['product_url']
+            checkout_url = PROPERTIES.checkout_url+checkout_id+PROPERTIES.checkout_quantity
+            dictsizeCheck[size] = checkout_url
+            envio.dictsizeCheck=dictsizeCheck
+    return envio
+            
+
+
