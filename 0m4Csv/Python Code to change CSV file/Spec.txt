@@ -1,0 +1,43 @@
+Hi
+
+I need some Python coding done.
+
+I have CSV files.
+
+I want code to go through the CVS files and reformat.
+
+Find attached 2 files.
+
+One file is the format I need.
+The other is a format that I need to convert called 'Bad format.csv'.
+
+I need to have quotes and heading renamed.
+
+I want to have a 3rd CSV mapping file.
+Here, we remap heading names.
+This will have 2 columns say.
+We might have for example:
+
+User Id:Transaction ID
+
+So the 'Transaction ID' will get changed to 'User ID' in the new fiule generated.
+
+The code goes through and renames titles if a match is found.
+If none found, then it's left as it is.
+
+We ALSO need to have the same order of titles as the first CSV - for columns that have matching names.
+
+The output MUST be *exactly* the same as the correct file format file 'Format needed.csv'.
+This has quote marks in the CSV files. As far as I know, this is the only difference.
+Other places where we have comma characters - these need to be removed in the new file.
+
+The bottom part of the good version of the file has an email address. The bad format doesn't have an email address, instead has an ID. Here, just add @gmail at the end of the ID in the new file.
+
+The new file generated should have the file name format 'fixed.ABC Test file.csv' - i.e. we add 'fixed' to the front of the file name.
+
+They code should work with many files, processing files one at a time and generating the new file formats.
+
+The code will be called EXACTLY like this:
+
+"F:\My Python Code\First DIR\Second Dir\python-code\Development verion\myscript.py" "F:\My Python Code\First DIR\Second Dir\Data\abc test.csv" "F:\My Python Code\First DIR\Second Dir\Data\Yet Another File.csv" "F:\My Python Code\First DIR\Second Dir\Data\Another file.csv" "F:\My Python Code\First DIR\Second Dir\Data\XYZ File.csv" "Custom Label"
+

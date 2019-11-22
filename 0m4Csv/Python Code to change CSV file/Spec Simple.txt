@@ -1,0 +1,16 @@
+I need some Python code to reformat a CSV file - simply add quotation marks around fields and make the file same as another file (that involves getting rid of empty rows with commas).
+
+There is a small complexity: if a field already has quote marks around, then don't add quote marks - just leave as is.
+
++ at the end, there is an ID, I need to change that ID to an email address.
+
+The output file needs to be called 'fixed.original file name.csv' - i.e. have 'fixed' added in front.
+
+Also, the code needs to execute on 1 or more files.
+So, I would call like this:
+
+"my script.py" ''file 1.csv" "number 2.csv" "my third file.csv"
+
+Only looking to pay the basic fee. Assuming the work is simple. Let me know if you can help.
+
+The 2 files attached shows what's needed.

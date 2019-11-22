@@ -30,9 +30,11 @@ if __name__ == '__main__':
     # print('adios')
 
     #mapacoletzione=helperCommon.llenadictproductos()
+    
+    
     print(strftime("%Y-%m-%d %H:%M:%S", gmtime()))
     ahora=datetime.now()
-    #helperCommon.buscarproductos()
+    #helperCommon.buscarproductos()-->pocos productos, algo lento va uno por uno, consume uno por llamada
     #Primero traer archivo de coleccion
     collections = []
     collections = PROPERTIES.collectionToParse.split(',')
