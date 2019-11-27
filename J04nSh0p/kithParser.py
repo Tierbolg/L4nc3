@@ -38,12 +38,12 @@ if __name__ == '__main__':
     #Primero traer archivo de coleccion
     collections = []
     collections = PROPERTIES.collectionToParse.split(',')
-    if os.path.exists(PROPERTIES.fileTemp):
-        os.remove(PROPERTIES.fileTemp)
+    #if os.path.exists(PROPERTIES.fileTemp):
+    #    os.remove(PROPERTIES.fileTemp)
 
     # Archivo sin el checkout
     # helperShopify.extract_products(PROPERTIES.url,PROPERTIES.fileTemp,collections)
-    helperCommon.generatecommonfile()
+    # comentado por eficiencia helperCommon.generatecommonfile()
     print(strftime("%Y-%m-%d %H:%M:%S", gmtime()))
     despues=datetime.now()
     diferencia=despues-ahora

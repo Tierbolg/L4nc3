@@ -1,11 +1,10 @@
-Collection,Url
-hoodies,https://kith.com/products/kith-williams-iii-contrast-hoodie-scarab
-hoodies,https://kith.com/products/kith-williams-iii-hoodie-light-heather-grey
-hoodies,https://kith.com/products/kith-corduroy-double-pocket-hoodie-cinder
-Sneakers,https://kith.com/products/aacp9783
-Sneakers,https://kith.com/products/kith-tech-cargo-trouser-black
-Sneakers,https://kith.com/products/siki-im-peg-chino-pintuck-twill-black
-Sneakers,https://kith.com/products/common-projects-wmns-new-track-contrast-tan
-Sneakers,https://kith.com/products/naked-wolfe-sporty-white
-Sneakers,https://kith.com/products/naked-wolfe-sprinter-white
-Pants,https://kith.com/products/kith-varick-denim-hosu-2-0-wash
+Collection,Url,Size
+hoodies,https://kith.com/products/kith-williams-iii-contrast-hoodie-scarab,XS M L XL
+hoodies,https://kith.com/products/kith-williams-iii-hoodie-light-heather-grey,XS M L XL
+hoodies,https://kith.com/products/kith-corduroy-double-pocket-hoodie-cinder,M
+Sneakers,https://kith.com/products/kith-tech-cargo-trouser-black,34 36 38
+Sneakers,https://kith.com/products/siki-im-peg-chino-pintuck-twill-black,30 32 34
+Sneakers,https://kith.com/products/common-projects-wmns-new-track-contrast-tan,40
+Sneakers,https://kith.com/products/naked-wolfe-sporty-white,36 37 40
+Sneakers,https://kith.com/products/naked-wolfe-sprinter-white,36 37 38 39 40
+Pants,https://kith.com/products/kith-varick-denim-hosu-2-0-wash,30 32 33 34 36 38

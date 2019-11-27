@@ -119,7 +119,7 @@ def generatecommonfile():
         writer = csv.writer(f)
         writer.writerow(['Collection', 'Title', 'Price', 'Checkout',
                          'UrlImage', 'Product_Url',
-                         'Checkout_Url', 'Size','Stock'])
+                         'Checkout_Url', 'Size', 'Stock'])
 
         for collection in filtercollection():
             collectionName = ""
@@ -130,7 +130,7 @@ def generatecommonfile():
             product_url = ""
             checkout_url = ""
             size = ""
-            stock=""
+            stock = ""
             dictsizeCheck = {}
             for product in extract_products_collection(PROPERTIES.url, collection):
                 collectionName = collection
@@ -142,12 +142,12 @@ def generatecommonfile():
                 product_url = product['product_url']
                 checkout_url = PROPERTIES.checkout_url+checkout_id+PROPERTIES.checkout_quantity
                 #dictsizeCheck[size] = checkout_url
-                stock=product['stock']
+                stock = product['stock']
                 # print("Title: {} Price: {} checkout: {} size: {} ".format(
                 #    title, price, checkout_url, size))
-                
+
                 writer.writerow([
-                    collectionName, title, price, checkout_id, urlImage, product_url, checkout_url, size,stock])
+                    collectionName, title, price, checkout_id, urlImage, product_url, checkout_url, size, stock])
 
 
 def discordsend(title, product_url, urlImage, checkout_url, price, size, dictsizeCheck):
@@ -213,6 +213,13 @@ def buscarproductos():
             print(row)
 
 
+class Guardartemp:
+    collection = ''
+    urlProduct = ''
+    size = ''
+    pass
+
+
 class Envios:
     title = ''
     price = ''
@@ -222,6 +229,7 @@ class Envios:
     urlImage = ''
     checkout_url = ''
     dictsizeCheck = {}
+    addToTemp = False
     pass
 
 
@@ -245,6 +253,7 @@ def comparador(urlCompare, coleccioncheck):
 
 
 def buscarproductos2():
+    listaProductos = []
     with open(PROPERTIES.csv_configuration, newline='') as f:
         reader = csv.DictReader(f, delimiter=',', quoting=csv.QUOTE_NONE)
         for row in reader:
@@ -256,28 +265,102 @@ def buscarproductos2():
             size = ""
             dictsizeCheck = {}
             # Cada renglon es un producto, muchas tallas
-            claseGenerada = comparador2(row['Url'], row['Collection'])
-            print(claseGenerada.title)
-            discordsend(claseGenerada.title, claseGenerada.product_url, claseGenerada.urlImage,
-                        claseGenerada.checkout_url, claseGenerada.price, claseGenerada.size, claseGenerada.dictsizeCheck)
+            claseGenerada = comparador2(
+                row['Url'], row['Collection'], row['Size'])
+            # print(claseGenerada.title)
+
+            # Guardar en archivo temporal para no volver a enviar
+            if claseGenerada.addToTemp == True:
+                guardartemp = Guardartemp()
+                guardartemp.collection = row['Collection']
+                guardartemp.urlProduct = row['Url']
+                guardartemp.size = claseGenerada.dictsizeCheck
+                listaProductos.append(guardartemp)
+                discordsend(claseGenerada.title, claseGenerada.product_url, claseGenerada.urlImage,
+                            claseGenerada.checkout_url, claseGenerada.price, claseGenerada.size, claseGenerada.dictsizeCheck)
             print(row)
+        guardarproductosnuevos(listaProductos)
 
 
-def comparador2(urlCompare, coleccioncheck):
+def guardarproductosnuevos(guardartemp):
+    with open(PROPERTIES.fileAdded, 'a') as f:
+        writer = csv.writer(f)
+        #writer.writerow(['Collection', 'Url', 'Size'])
+        for elementToWrite in guardartemp:
+            listToStringSize2 = ""
+            for x, y in elementToWrite.size.items():
+                print(x, y)
+                listToStringSize2 = listToStringSize2+x+" "
+
+            writer.writerow([elementToWrite.collection,
+                             elementToWrite.urlProduct, listToStringSize2])
+
+
+def comparaennuevos(urlCompare, coleccioncheck, size):
+    sizeArray = []
+    sizeArray = size.split()
+    listaProductos = []
+    with open(PROPERTIES.fileAdded, 'r') as resultadoProductos:
+        writer = csv.writer(resultadoProductos)
+        csvReader = csv.reader(resultadoProductos, delimiter=',')
+        for row in csvReader:
+            arreglo = row[2].split()
+            # Compare product with collection
+            for productSize in arreglo:
+                if coleccioncheck.lower() == row[0].lower() and urlCompare == row[1] and productSize not in arreglo:
+                    # writer.writerow([coleccioncheck,urlCompare,productSize])
+                    guardartemp = Guardartemp()
+                    guardartemp.collection = row[0]
+                    guardartemp.urlProduct = row[1]
+                    guardartemp.size = productSize
+                    listaProductos.append(guardartemp)
+
+    if len(listaProductos) > 1:
+        with open(PROPERTIES.fileAdded, 'a') as f:
+            writer = csv.writer(f)
+            #writer.writerow(['Collection', 'Url', 'Size'])
+            for elementToWrite in listaProductos:
+                writer.writerow([elementToWrite.collection,
+                                 elementToWrite.urlProduct, size])
+
+
+def extraelistanuevos(urlCompare, coleccioncheck):
+    listaTallas = []
+    with open(PROPERTIES.fileAdded, 'r') as resultadoProductos:
+        csvReader = csv.reader(resultadoProductos, delimiter=',')
+        for row in csvReader:
+            sizeArray = []
+            sizeArray = row[2].split()
+            if coleccioncheck.lower() == row[0].lower() and urlCompare == row[1]:
+                listaTallas.append(row[2])
+    return listaTallas
+
+
+def comparador2(urlCompare, coleccioncheck, size):
     envio = Envios()
+    tallas = []
+    tallas = size.split()
     dictsizeCheck = {}
+    tallasnuevas = extraelistanuevos(urlCompare, coleccioncheck)
+    tallasnuevas1=[]
+    if len(tallasnuevas) == 1:
+        tallasnuevas1 = tallasnuevas[0].split()
     with open(PROPERTIES.fileTemp) as resultadoProductos:
         csvReader = csv.reader(resultadoProductos, delimiter=',')
         for row in csvReader:
             # Compare product with collection
             if coleccioncheck.lower() == row[0].lower() and urlCompare == row[5] and row[8] == "Yes":
-                envio.title = row[1]
-                envio.price = row[2]                
-                size = row[7]
-                envio.size=size
-                envio.urlImage = row[4]
-                envio.product_url = row[5]
-                envio.checkout_url = row[6]
-                dictsizeCheck[size] = row[6]
-                envio.dictsizeCheck = dictsizeCheck
+                # Check if is in newproducts, get list of size
+                if row[7] not in tallasnuevas1 and row[7] not in tallas:
+                    envio.title = row[1]
+                    envio.price = row[2]
+                    size = row[7]
+                    envio.size = size
+                    envio.urlImage = row[4]
+                    envio.product_url = row[5]
+                    envio.checkout_url = row[6]
+                    dictsizeCheck[size] = row[6]
+                    envio.dictsizeCheck = dictsizeCheck
+                    envio.addToTemp = True
+
     return envio
