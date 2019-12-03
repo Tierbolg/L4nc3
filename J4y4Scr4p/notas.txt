@@ -1,0 +1,22 @@
+http://eenaduweb.nikniutec.com
+Admin URL : http://eenaduweb.nikniutec.com/wp-admin/
+User : admin
+Password :  vjRNmPUmEFE2FzIT64
+
+User : public-admin
+Password : UVh74ltIqL3&pG(SzNDl0gPg
+
+pass de aplicacion : qNFJ Flnm 10he 9mXr CBHr 36AL
+
+
+Para mandar los links embebidos
+https://developer.wordpress.org/rest-api/using-the-rest-api/linking-and-embedding/
+
+Para poder hacer un publish de un post
+https://parzibyte.me/blog/2018/01/22/gestionando-sitio-blog-api-wordpress-python/
+
+analizar paginas comoe stan construidas
+https://www.isitwp.com/
+
+que tema de wordpress estan usando
+https://whatwpthemeisthat.com/
