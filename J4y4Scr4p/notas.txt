@@ -20,3 +20,47 @@ https://www.isitwp.com/
 
 que tema de wordpress estan usando
 https://whatwpthemeisthat.com/
+
+
+
+
+ # Get common object to parse the html
+    driver = webdriver.Firefox(executable_path=properties.PATH_SELENIUM)
+    driver.get(urlgenerada)    
+    htmlObtenido = driver.page_source
+    soup1 = BeautifulSoup(htmlObtenido)
+    bloquedeposts1=soup1.findAll("div",{"class":"movies_news_description_container float-left"})
+    for post in mapapagina['articles']:
+        postToScrap=bloquedeposts[int(post)]
+        imagen=postToScrap.findAll("div",{"class":"img_plc"})
+        fuenteimagen=imagen[0].find('img')['src']
+        titulo=postToScrap.find('a')['title']
+        urlvisitar=postToScrap.find('a')['href']
+        content=postToScrap.findAll("div",{"class":"view_mov_poli_content"})
+
+
+agregar referencia al artículo de origen:
+
+Protests were held at various places across the country against the ghastly incident of the brutal rape and murder of a woman veterinarian Disha with the enraged public demanding that the four accused be handed out stringent punishment of death penalty.
+
+<a href="https://www.greatandhra.com/movies/news/manoj-assurance-to-family-of-hyd-vet-101118">Read More</a>
+
+se abre en una nueva página:
+<a href="https://www.greatandhra.com/movies/news/manoj-assurance-to-family-of-hyd-vet-101118" target="_blank" rel="noopener">Read More</a>
+
+
+'\n\t\t\t\t\t\t\t\t\tBollywood actress Minissha Lamba, who made her debut with ‘Yahaan’, has upped the hotness quotient with her beach vacation pictures.\t\t\t\t\t\t\t\t\t<a href="https://www.greatandhra.com/movies/news/photo-gallery-hotness-redefined-101113" target="_blank" rel="noopener">Read More</a>'
+
+
+
+'https://www.greatandhra.com/movies/news/photo-gallery-hotness-redefined-101113'
+
+
+
+'<!DOCTYPE html><html><head><title>Page Title</title><style type=”text/css”></style></head><body>hola que tal<br><a href="https://www.greatandhra.com/movies/news/manoj-assurance-to-family-of-hyd-vet-101118" target="_blank" rel="noopener">Read More</a></body></html>'
+
+
+'\n\t\t\t\t\t\t\t\t\tAs soon as the much-awaited first song ‘Mind Block’ from ‘Sarileru Neekevvaru’ is out, the Twitterati started typing their keyboards to point out the similarities between this song and Nenu Sailaja’s title song.\t\t\t\t\t\t\t\t\t<a href="https://www.greatandhra.com/movies/news/manoj-assurance-to-family-of-hyd-vet-101118" target="_blank" rel="noopener">Read More</a>'
+
+
+mh magazine lite

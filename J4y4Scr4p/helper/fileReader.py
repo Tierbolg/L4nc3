@@ -9,4 +9,4 @@ def abrearchivocsvconfig():
         for row in reader:            
             print(row)
             if(row['class']=='greatandhra'):
-                greatandhraclass.extractposts(row)
+                return greatandhraclass.extractposts(row)
