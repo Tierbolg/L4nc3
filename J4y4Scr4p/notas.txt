@@ -1,7 +1,7 @@
 http://eenaduweb.nikniutec.com
 Admin URL : http://eenaduweb.nikniutec.com/wp-admin/
-User : admin
-Password :  vjRNmPUmEFE2FzIT64
+User : administrator
+Password :  vjRNmPUmEFE2FzIT641
 
 User : public-admin
 Password : UVh74ltIqL3&pG(SzNDl0gPg
@@ -21,8 +21,11 @@ https://www.isitwp.com/
 que tema de wordpress estan usando
 https://whatwpthemeisthat.com/
 
+no solo cms, muy bueno
+https://w3techs.com/sites
 
-
+analisis super detallado de las paginas
+https://builtwith.com/
 
  # Get common object to parse the html
     driver = webdriver.Firefox(executable_path=properties.PATH_SELENIUM)
@@ -64,3 +67,32 @@ se abre en una nueva página:
 
 
 mh magazine lite
+
+
+col-sm-12 col-xs-12 tstry-feed-sml-a entertainment
+col-sm-12 col-xs-12 tstry-feed-sml-a sports
+col-sm-12 col-xs-12 tstry-feed-sml-a
+
+https://www.financialexpress.com/-->solo de finanzas, ninguna categoria
+
+
+greatandhra,https://www.greatandhra.com/,moviegossip,entertainment,5
+greatandhra,https://www.greatandhra.com/,latest,flash news,5
+greatandhra,https://www.greatandhra.com/,movies,movies,5
+greatandhra,https://www.greatandhra.com/,politics,politics,5
+newindianexpress,https://www.newindianexpress.com/,sport/football,sports,5
+newindianexpress,https://www.newindianexpress.com/,entertainment/english,entertainment,5
+newindianexpress,https://www.newindianexpress.com/,entertainment/review,entertainment,5
+newindianexpress,https://www.newindianexpress.com/,sport/cricket,sports,5
+newindianexpress,https://www.newindianexpress.com/,sport/tennis,sports,5
+newindianexpress,https://www.newindianexpress.com/,sport/other,sports,5
+newindianexpress,https://www.newindianexpress.com/,world,flash news,5
+newindianexpress,https://www.newindianexpress.com/,nation,flash news,5
+newindianexpress,https://www.newindianexpress.com/,good-news,flash news,5
+newindianexpress,https://www.newindianexpress.com/,business,flash news,5
+
+ojo no tienen content, descripcion chiquita
+deccanchronicle,https://www.deccanchronicle.com/,nation,flash news,5
+deccanchronicle,https://www.deccanchronicle.com/,entertainment,entertainment,5
+deccanchronicle,https://www.deccanchronicle.com/,world,politics,5
+deccanchronicle,https://www.deccanchronicle.com/,sports,sports,5

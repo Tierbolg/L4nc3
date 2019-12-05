@@ -1,13 +1,12 @@
 from wordpress_xmlrpc import Client, WordPressPost
 from wordpress_xmlrpc.compat import xmlrpc_client
-from wordpress_xmlrpc.methods.users import GetUserInfo
 from wordpress_xmlrpc.methods import posts, media
 import config.properties as properties
 import urllib.request
 import os
 
 def publishPost():    
-    cliente = Client(properties.ENDPOINT_WORDPRESS, properties.USER_WORDPRESS, properties.PASS_WORDPRESS)
+    cliente = Client('http://demoeenaduweb.nikniutec.com/xmlrpc.php', properties.USER_WORDPRESS, properties.PASS_WORDPRESS)
     nueva_entrada = WordPressPost()
     nueva_entrada.title = "Entrada con categorías"
     nueva_entrada.content = "Soy otra entrada publicada con la api de wp :)<br>En este caso llevo etiquetas y categorías"
