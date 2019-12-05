@@ -26,8 +26,8 @@ def main():
                 wordpress.publicarlistadeposts(deccanchronicleclass.extractposts(row))
             if(row['class']=='newindianexpress'):
                 wordpress.publicarlistadeposts(newindianexpressclass.extractposts(row))
-            #if(row['class']=='economictimes'):
-                #wordpress.publicarlistadeposts(economictimesclass.extractposts(row))
+            if(row['class']=='economictimes'):
+                wordpress.publicarlistadeposts(economictimesclass.extractposts(row))
                  
 
     #print("Lista generada")

@@ -90,9 +90,29 @@ newindianexpress,https://www.newindianexpress.com/,world,flash news,5
 newindianexpress,https://www.newindianexpress.com/,nation,flash news,5
 newindianexpress,https://www.newindianexpress.com/,good-news,flash news,5
 newindianexpress,https://www.newindianexpress.com/,business,flash news,5
-
+economictimes,https://economictimes.indiatimes.com/,industry/cons-products/electronics,politics,2
+economictimes,https://economictimes.indiatimes.com/,industry/cons-products/durables,politics,2
+economictimes,https://economictimes.indiatimes.com/,industry/cons-products/fashion-/-cosmetics-/-jewellery,politics,2
+economictimes,https://economictimes.indiatimes.com/,industry/cons-products/fmcg,politics,2
+economictimes,https://economictimes.indiatimes.com/,industry/cons-products/food,politics,2
+economictimes,https://economictimes.indiatimes.com/,industry/cons-products/garments-/-textiles,politics,2
+economictimes,https://economictimes.indiatimes.com/,industry/cons-products/liquor,politics,2
+economictimes,https://economictimes.indiatimes.com/,industry/cons-products/paints,politics,2
+economictimes,https://economictimes.indiatimes.com/,industry/cons-products/tobacco,politics,2
+economictimes,https://economictimes.indiatimes.com/,news/international/business,politics,2
+economictimes,https://economictimes.indiatimes.com/,news/international/world-news,politics,2
+economictimes,https://economictimes.indiatimes.com/,news/economy/agriculture,politics,2
+economictimes,https://economictimes.indiatimes.com/,news/economy/finance,politics,2
+economictimes,https://economictimes.indiatimes.com/,news/economy/foreign-trade,politics,2
+economictimes,https://economictimes.indiatimes.com/,news/economy/indicators,politics,2
+economictimes,https://economictimes.indiatimes.com/,news/economy/infrastructure,politics,2
+economictimes,https://economictimes.indiatimes.com/,news/economy/policy,politics,2
 ojo no tienen content, descripcion chiquita
 deccanchronicle,https://www.deccanchronicle.com/,nation,flash news,5
 deccanchronicle,https://www.deccanchronicle.com/,entertainment,entertainment,5
 deccanchronicle,https://www.deccanchronicle.com/,world,politics,5
 deccanchronicle,https://www.deccanchronicle.com/,sports,sports,5
+
+
+botplData flt--news/politics-nation
+eachStory--news/international/business,industry/cons-products/fashion-/-cosmetics-/-jewellery
